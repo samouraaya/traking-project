@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>Projet</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ projet.id }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{% if projet.dateDebut %}{{ projet.dateDebut|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Heuredebut</th>
+                <td>{% if projet.heureDebut %}{{ projet.heureDebut|date('H:i:s') }}{% endif %}</td>
+            </tr>
+
+            <tr>
+                <th>Datefin</th>
+                <td>{% if projet.dateFin %}{{ projet.dateFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Heurefin</th>
+                <td>{% if projet.heureFin %}{{ projet.heureFin|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ projet.type }}</td>
+            </tr>
+            <tr>
+                <th>Application</th>
+                <td>{{ projet.application }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ projet.pays }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ projet.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('projet_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('projet_edit', { 'id': projet.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

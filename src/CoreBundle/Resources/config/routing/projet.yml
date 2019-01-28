@@ -1,0 +1,42 @@
+projet_index:
+    path:     /index
+    defaults: { _controller: "CoreBundle:Projet:index" }
+    methods:  GET
+#projet_export:
+#    path:     /index/{_filename}.{_format}
+#    defaults: { _controller: CoreBundle:Projet:export, _format: xlsx }
+#    methods:  GET
+projet_export:
+    path:     /index/{_filename}.{_format}
+    defaults: { _controller: CoreBundle:Projet:export, _format: xlsx }
+projet_show:
+    path:     /{id}/show
+    defaults: { _controller: "CoreBundle:Projet:show" }
+    methods:  GET
+Acceuil:
+    path:     /
+    defaults: { _controller: "CoreBundle:Projet:acceuil" }
+    methods:  [GET, POST]
+projet_new_dev:
+    path:     /dev
+    defaults: { _controller: "CoreBundle:Projet:newDev" }
+    methods:  [GET, POST]
+
+projet_new_infra:
+    path:     /infra
+    defaults: { _controller: "CoreBundle:Projet:newInfra" }
+    methods:  [GET, POST]
+
+projet_edit_infra:
+    path:     /{id}/editInfra
+    defaults: { _controller: "CoreBundle:Projet:editInfra" }
+    methods:  [GET, POST]
+
+projet_edit_dev:
+    path:     /{id}/editDev
+    defaults: { _controller: "CoreBundle:Projet:editDev" }
+    methods:  [GET, POST]
+projet_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CoreBundle:Projet:delete" }
+    methods:  DELETE

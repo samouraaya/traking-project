@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+{% block title%} Traking projet{% endblock %}
+{% block css %}
+    <style>
+        .loading{
+            float: right;
+            width: 15px;
+            height: 15px;
+            display: block;
+            background: url("{{ asset('TemplateFront/img/spinner.gif') }}");
+        }
+
+        .bigload{
+            float: left;
+            width: 800px;
+            height: 600px;
+            display: block;
+            background: url("{{ asset('TemplateFront/img/autoload.gif') }}");
+        }
+
+        .remb-ant {
+            background: #bfc700;
+        }
+
+
+    </style>
+
+
+{% endblock %}
+{% block content %}
+
+
+
+<div class="accordion" id="calc_type_1">
+    <div class="accordion-group widget-box">
+        <div class="accordion-heading">
+            <div class="widget-title">
+                <a data-parent="#collapse-group" href="" data-toggle="collapse">
+                    <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px"><a href="{{ path('projet_index') }}" style="color: #69c74d;font-size: 18px">Liste de projets</a></div></h5>
+                </a>
+                {% if is_granted('ROLE_DEV') == TRUE %}
+                <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px">   <a href="{{ path('projet_new_dev') }}" style="color: #69c74d;font-size: 18px">Ajouter   </a></div></h5>
+
+                {% elseif is_granted('ROLE_INFRA') == TRUE %}
+                    <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px">   <a href="{{ path('projet_new_infra') }}" style="color: #69c74d;font-size: 18px">Ajouter   </a></div></h5>
+                {% endif %}
+            </div>
+        </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            {% if app.request.get('erreur') is not null %}
+            <div  id="alert_rim" class="alert alert-error alert-block">
+                <h4 class="alert-heading"> {{ app.request.get('erreur') }}</h4>
+
+            </div>
+            {% endif %}
+            <form action="" method="post">
+                <div style="width: 50%;
+                     margin: 0px auto;
+                     margin-left: 25% ">
+                    <div class="widget-box">
+                        <div class="widget-title">
+
+                        </div>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered">
+
+                                <tbody>
+                                <tr>
+                                    <td>Date Debut</td>
+                                    <td>
+
+                                        {{ form_widget(form.dateDebut,{'attr':{'class' : ''}}) }}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Heure Debut</td>
+                                    <td>
+                                        {{ form_widget(form.heureDebut.hour) }}
+                                        <br/>
+                                        {{ form_widget(form.heureDebut.minute) }}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date Fin</td>
+                                    <td>
+                                        {{ form_widget(form.dateFin,{'attr':{'class' : ''}}) }}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Heure Fin</td>
+                                    <td>
+                                      {#  {{ form_widget(form.heureFin,{'attr':{'class' : ''}}) }}#}
+                                        {{ form_widget(form.heureFin.hour) }}
+                                        <br/>
+                                       {{ form_widget(form.heureFin.minute) }}
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>
+
+                                        {{ form_widget(form.type,{'attr':{'class' : ''}}) }}
+
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Application</td>
+                                    <td>
+
+                                        {{ form_widget(form.application,{'attr':{'class' : ''}}) }}
+
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Pays</td>
+                                    <td>
+
+                                        {{ form_widget(form.pays,{'attr':{'class' : ''}}) }}
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>
+
+                                        {{ form_widget(form.description,{'attr':{'class' : ''}}) }}
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+
+
+                                        {{ form_widget(form._token) }}
+                                        <input type="submit" value="Create" />
+                                    </td>
+                                </tr>
+                              {#  <input id="agence" type="hidden" value="{{ user.agence }}">#}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    </div>
+
+</div>
+{% endblock %}
+

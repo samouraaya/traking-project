@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a80dc50a-0574-4d82-8617-4da070b45782" name="10.80.1.40" url="http://10.80.1.40">
+        <fileTransfer host="10.80.1.40" port="22" rootFolder="/var/www/html/traking_applicationv1" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

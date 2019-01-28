@@ -1,0 +1,4 @@
+CoreBundle\Entity\Projet:
+    properties:
+        dateDebut:
+            - DateTime: ~

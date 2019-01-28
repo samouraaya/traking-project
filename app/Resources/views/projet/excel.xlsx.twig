@@ -1,0 +1,28 @@
+{% xlsdocument %}
+    {% xlssheet 'Worksheet' %}
+        {% xlsrow %}
+            {% xlscell { style: { font: { size: '14' } } } %}Date debut{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Heure debut{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Date fin{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Heure fin{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Type{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Application{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Pays{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}Description{% endxlscell %}
+            {% xlscell { style: { font: { size: '14' } } } %}User{% endxlscell %}
+        {% endxlsrow %}
+        {% for projet in projetsManager %}
+            {% xlsrow %}
+            {% xlscell %}{{ projet.dateDebut|date('Y-m-d') }}{% endxlscell %}
+            {% xlscell %}{{ projet.heureDebut|date('H:i:s') }}{% endxlscell %}
+            {% xlscell %}{{ projet.dateFin|date('Y-m-d') }}{% endxlscell %}
+            {% xlscell %}{{ projet.heureFin|date('H:i:s') }}{% endxlscell %}
+            {% xlscell %}{{ projet.type }}{% endxlscell %}
+            {% xlscell %}{{ projet.application }}{% endxlscell %}
+            {% xlscell %}{{ projet.pays }}{% endxlscell %}
+            {% xlscell %}{{ projet.description }}{% endxlscell %}
+            {% xlscell %}{{ projet.user.username }}{% endxlscell %}
+            {% endxlsrow %}
+        {% endfor %}
+    {% endxlssheet %}
+{% endxlsdocument %}

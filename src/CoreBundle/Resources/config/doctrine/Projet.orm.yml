@@ -1,0 +1,44 @@
+CoreBundle\Entity\Projet:
+    type: entity
+    table: null
+    repositoryClass: CoreBundle\Repository\ProjetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        dateDebut:
+            type: datetime
+            column: date_debut
+        heureDebut:
+            type: datetime
+            column: heure_debut
+        dateFin:
+            type: datetime
+            column: date_fin
+        heureFin:
+            type: datetime
+            column: heure_fin
+        type:
+            type: string
+            length: 255
+            column: type
+        application:
+            type: string
+            length: 255
+            column: application
+        pays:
+            type: string
+            length: 255
+            column: pays
+        description:
+            type: text
+            column: description
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: projets
+
+    lifecycleCallbacks: {  }

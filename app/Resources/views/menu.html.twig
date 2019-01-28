@@ -1,0 +1,31 @@
+<div id="sidebar">
+
+    <ul class="nav"  style="width:50%;">
+        <li class="" > <a class="sAdd" title=""><img src="{{ asset('TemplateFront/img/logo.png') }} " style="max-width: 19%;" ></a></li>
+    </ul>
+
+
+
+    <ul class="nav" style =" margin: 12px; float: right; width:auto">
+
+
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text">{{ user.username }}</span>  <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a class="sAdd" title="" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+
+            </ul>
+        </li>
+        {% if is_granted('ROLE_DEV') == TRUE or is_granted('ROLE_INFRA') == TRUE  %}
+        {% if is_granted('ROLE_DEV') == TRUE %}
+        <li class=""><a title="" href="{{ path('projet_new_dev') }}"><span class="text">Acceuil </span></a></li>
+         {% elseif is_granted('ROLE_INFRA') == TRUE %}
+             <li class=""><a title="" href="{{ path('projet_new_infra') }}"><span class="text">Acceuil </span></a></li>
+        {% endif  %}
+        {% endif  %}
+        <li class=""><a title="" href="{{ path('projet_index') }}"> <span class="text">Liste de projets </span></a></li>
+        <li class=""><a title="" href="#"> <span class="text">{{ "now"|date("d/m/Y") }}</span></a></li>
+
+    </ul>
+</div>
+
+

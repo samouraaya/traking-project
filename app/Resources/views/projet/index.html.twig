@@ -1,0 +1,124 @@
+
+{% extends 'base.html.twig' %}
+
+{% block content%}
+
+<div class="accordion" id="calc_type_1">
+    <div class="accordion-group widget-box">
+        <div class="accordion-heading">
+            <div class="widget-title">
+                <a data-parent="#collapse-group" href="" data-toggle="collapse">
+                    <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px"><a href="{{ path('projet_index') }}" style="color: #69c74d;font-size: 18px">Liste de projets</a></div></h5>
+                </a>
+
+                {% if is_granted('ROLE_DEV') == TRUE %}
+                    <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px">   <a href="{{ path('projet_new_dev') }}" style="color: #69c74d;font-size: 18px">Ajouter   </a></div></h5>
+
+                {% elseif is_granted('ROLE_INFRA') == TRUE %}
+
+                    <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px">   <a href="{{ path('projet_new_infra') }}" style="color: #69c74d;font-size: 18px">Ajouter   </a></div></h5>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') == TRUE %}
+                <span class="icon"><i class="icon-ok"></i></span><h5><div  style="color: #69c74d;font-size: 18px">   <a href="{{ path('projet_export',{ '_filename': 'export'})}}" style="color: #69c74d;font-size: 18px">Exporter   </a></div></h5>
+                {% endif %}
+            </div>
+        </div>
+        <div class="collapse in accordion-body" id="calc_type_1_content">
+            <div class="widget-content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"><i class="icon-th"></i></span>
+
+                            </div>
+                            <div class="widget-content nopadding">
+                                <table class="table table-bordered data-table">
+                                    <thead>
+
+                                    <tr>
+
+                                        <th>Id</th>
+                                        <th>Datedebut</th>
+                                        <th>Heuredebut</th>
+                                        <th>Datefin</th>
+                                        <th>Heurefin</th>
+                                        <th>Type</th>
+                                        <th>Application</th>
+                                        <th>Pays</th>
+                                        <th>Description</th>
+                            {% if is_granted('ROLE_ADMIN') == TRUE %}
+                                        <th>Nom User</th>
+                                {% endif %}
+
+                            {% if is_granted('ROLE_INFRA') == TRUE or is_granted('ROLE_DEV') == TRUE  %}
+                                        <th>Actions</th>
+                            {% endif %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% if is_granted('ROLE_ADMIN') == TRUE %}
+                                        {% set i = 0 %}
+                                        {% for projet in projetsManager %}
+                                            <tr class="gradeX">
+                                                <td>{% set i=i+1  %} {{ i }} </td>
+                                                <td>{% if projet.dateDebut %}{{ projet.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                                                <td>{% if projet.heureDebut %}{{ projet.heureDebut|date('H:i:s') }}{% endif %}</td>
+                                                <td>{% if projet.dateFin %}{{ projet.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                                <td>{% if projet.heureFin %}{{ projet.heureFin|date('H:i:s') }}{% endif %}</td>
+                                                <td>{{ projet.type }}</td>
+                                                <td>{{ projet.application }}</td>
+                                                <td>{{ projet.pays }}</td>
+                                                <td>{{ projet.description }}</td>
+                                                <td>{{ projet.user.username }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        {%  elseif is_granted('ROLE_DEV') == TRUE or is_granted('ROLE_INFRA') == TRUE  %}
+                                            {% set i = 0 %}
+                                            {% for projet in projetsCollaborateur %}
+
+                                        <tr class="gradeX">
+                                            <td>{% set i=i+1  %} {{ i }} </td>
+                                            <td>{% if projet.dateDebut %}{{ projet.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{% if projet.heureDebut %}{{ projet.heureDebut|date('H:i:s') }}{% endif %}</td>
+                                            <td>{% if projet.dateFin %}{{ projet.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{% if projet.heureFin %}{{ projet.heureFin|date('H:i:s') }}{% endif %}</td>
+                                            <td>{{ projet.type }}</td>
+                                            <td>{{ projet.application }}</td>
+                                            <td>{{ projet.pays }}</td>
+                                            <td>{{ projet.description }}</td>
+                                            <td>
+                                                {% if is_granted('ROLE_DEV') == TRUE %}
+                                                    <a href="{{ path('projet_edit_dev', { 'id': projet.id }) }}" style="color: #69c74d;font-size: 15px">Editer</a>
+
+                                                {% elseif is_granted('ROLE_INFRA') == TRUE %}
+
+                                                    <a href="{{ path('projet_edit_infra', { 'id': projet.id }) }}" style="color: #69c74d;font-size: 15px">Editer</a>
+                                                {% endif %}
+
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    {% endif %}
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
